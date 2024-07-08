@@ -1,7 +1,7 @@
 import { Component } from 'react';
-import SearchSection from './widgets/SearchSection.tsx';
-import ResultSection from './widgets/ResultSection.tsx';
-import ErrorSection from './widgets/ErrorSection.tsx';
+import SearchSection from '../widgets/SearchSection.tsx';
+import ErrorSection from '../widgets/ErrorSection.tsx';
+import ResultSection from '../widgets/ResultSection.tsx';
 import './App.css';
 
 export class App extends Component {
@@ -9,8 +9,8 @@ export class App extends Component {
     return (
       <div>
         <SearchSection />
-        <ResultSection />
         <ErrorSection />
+        <ResultSection />
       </div>
     );
   }
