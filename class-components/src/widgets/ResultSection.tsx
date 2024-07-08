@@ -1,14 +1,15 @@
 import { Component } from 'react';
 import getApiData from '../shared/getApiData';
 import ApiData from '../shared/types';
+import Card from '../entity/Card';
 import './ResultSection.css';
 
 interface State {
-  apiData: ApiData | null;
+  apiData: ApiData[] | null;
 }
 
 class ResultSection extends Component {
-  state: State  = {
+  state: State = {
     apiData: null
   };
 
@@ -23,9 +24,9 @@ class ResultSection extends Component {
     return (
       <div className="result-section">
         {apiData ? (
-          <div>
-            <p>Result</p>
-          </div>
+          apiData.map((data) => (
+            <Card key={data.uid} astronomicalObject={data} />
+          ))
         ) : (
           <p>Loading...</p>
         )}

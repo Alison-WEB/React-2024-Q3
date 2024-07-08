@@ -1,6 +1,11 @@
 interface ApiData {
-  astronomicalObjects: {}[];
-  page: {},
-  sort: {}
+  astronomicalObjectType: string;
+  location: null | {
+    uid: string,
+    name: string,
+  }
+  name: string,
+  uid: string
 }
+
 export default ApiData;

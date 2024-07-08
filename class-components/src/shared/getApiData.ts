@@ -1,5 +1,5 @@
 const url = 'https://stapi.co/api/v2/rest/astronomicalObject/search?';
-const endpoint = 'pageNumber=1&pageSize=10'
+const endpoint = 'pageNumber=1&pageSize=7'
 
 
 async function getApiData() {
@@ -10,8 +10,7 @@ async function getApiData() {
     },
   });
   const data = await response.json();
-  console.log(data);
-  return JSON.stringify(data);
+  return data.astronomicalObjects;
 }
 
 export default getApiData;
