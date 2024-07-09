@@ -7,7 +7,6 @@ interface Props {
 }
 
 class Card extends Component<Props> {
-
   render() {
     const { astronomicalObject } = this.props;
     return (

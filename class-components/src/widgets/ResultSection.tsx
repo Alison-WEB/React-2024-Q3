@@ -1,26 +1,22 @@
 import { Component } from 'react';
-import getApiData from '../shared/getApiData';
+
 import ApiData from '../shared/types';
 import Card from '../entity/Card';
 import './ResultSection.css';
 
-interface State {
+interface Props {
+  searchQuery: string;
   apiData: ApiData[] | null;
 }
 
-class ResultSection extends Component {
-  state: State = {
-    apiData: null
-  };
-
-  async componentDidMount() {
-    const data = await getApiData();
-    this.setState({ apiData: data });
+class ResultSection extends Component<Props> {
+  constructor(props: Props) {
+    super(props);
   }
 
   render() {
-    const { apiData } = this.state;
-
+    const { apiData } = this.props;
+    console.log(apiData);
     return (
       <div className="result-section">
         {apiData ? (

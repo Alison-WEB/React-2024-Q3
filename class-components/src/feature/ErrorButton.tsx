@@ -6,9 +6,7 @@ class ErrorButton extends Component {
     throw new Error('The button to generate an error was pressed.');
   }
   render() {
-    return (
-      <button onClick={() => this.throwError()}>Throw Error</button>
-    );
+    return <button onClick={() => this.throwError()}>Throw Error</button>;
   }
 }
 

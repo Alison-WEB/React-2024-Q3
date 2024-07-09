@@ -1,14 +1,14 @@
-const api = 'https://stapi.co/api/v2/rest/astronomicalObject/search?'
-const endpoint = 'pageSize=7'
+const api = 'https://stapi.co/api/v2/rest/astronomicalObject/search?';
+const endpoint = 'pageSize=7';
 
 async function getApiData(search?: string) {
   let url = '';
   if (search) {
-    url = `${api}name=${search}&${endpoint}`
+    url = `${api}name=${search}&${endpoint}`;
   } else {
-    url = `${api}${endpoint}`
+    url = `${api}${endpoint}`;
   }
-  
+  console.log(url);
   const response = await fetch(`${url}`, {
     method: 'POST',
     headers: {
