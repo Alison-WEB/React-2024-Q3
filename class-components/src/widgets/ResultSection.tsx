@@ -1,5 +1,4 @@
 import { Component } from 'react';
-
 import ApiData from '../shared/types';
 import Card from '../entity/Card';
 import './ResultSection.css';
@@ -15,7 +14,6 @@ class ResultSection extends Component<Props> {
 
   render() {
     const { apiData } = this.props;
-    console.log(apiData);
     return (
       <div className="result-section">
         {apiData && apiData.length > 0 ? (

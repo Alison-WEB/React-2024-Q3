@@ -28,13 +28,11 @@ export class App extends Component {
   render() {
     return (
       <div>
-        {/* <ErrorBoundary fallback={<FallbackComponent />}> */}
         <SearchSection
           searchQuery={this.state.searchQuery}
           fetchApiData={this.fetchApiData}
         />
         <ResultSection apiData={this.state.apiData} />
-        {/* </ErrorBoundary> */}
       </div>
     );
   }
