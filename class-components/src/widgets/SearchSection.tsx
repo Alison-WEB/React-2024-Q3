@@ -1,13 +1,11 @@
 import { Component, KeyboardEvent, ChangeEvent, FormEvent } from 'react';
 import SearchButton from '../feature/SearchButton.tsx';
 import ErrorButton from '../feature/ErrorButton.tsx';
-import getApiData from '../shared/getApiData';
-import ApiData from '../shared/types.ts';
 import './SearchSection.css';
 
 interface Props {
   searchQuery: string;
-  apiData: ApiData[] | null;
+  fetchApiData: (query?: string) => void;
 }
 
 class SearchSection extends Component<Props> {
@@ -17,7 +15,6 @@ class SearchSection extends Component<Props> {
 
   state = {
     searchQuery: this.props.searchQuery || '',
-    apiData: null,
   };
 
   handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,13 +30,7 @@ class SearchSection extends Component<Props> {
     if (this.state.searchQuery) {
       localStorage.setItem('searchQuery', this.state.searchQuery.trim());
     }
-    this.fetchApiData(this.state.searchQuery);
-    console.log(this.state.searchQuery);
-  };
-
-  fetchApiData = async (query?: string) => {
-    const data = await getApiData(query);
-    this.setState({ apiData: data });
+    this.props.fetchApiData(this.state.searchQuery);
   };
 
   render() {
@@ -47,10 +38,6 @@ class SearchSection extends Component<Props> {
       <div className="search-section">
         <h1>Database of Astronomical Objects</h1>
         <p>Dear reviewer! I'm sorry. Please, check back later.</p>
-        <p>
-          At the moment the search works if you click "Search" and then reload
-          the page 😢
-        </p>
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
@@ -59,6 +46,7 @@ class SearchSection extends Component<Props> {
             onChange={this.handleInputChange}
             onKeyDown={this.handleKeyPress}
             onKeyUp={this.handleKeyPress}
+            maxLength={20}
           />
           <SearchButton />
         </form>

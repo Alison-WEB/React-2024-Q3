@@ -5,7 +5,6 @@ import Card from '../entity/Card';
 import './ResultSection.css';
 
 interface Props {
-  searchQuery: string;
   apiData: ApiData[] | null;
 }
 
@@ -19,12 +18,16 @@ class ResultSection extends Component<Props> {
     console.log(apiData);
     return (
       <div className="result-section">
-        {apiData ? (
+        {apiData && apiData.length > 0 ? (
           apiData.map((data) => (
             <Card key={data.uid} astronomicalObject={data} />
           ))
         ) : (
-          <p>Loading...</p>
+          <p>
+            {apiData && apiData.length === 0
+              ? "We couldn't find anything for your search. Try adjusting your search terms."
+              : 'Loading...'}
+          </p>
         )}
       </div>
     );

@@ -8,7 +8,6 @@ async function getApiData(search?: string) {
   } else {
     url = `${api}${endpoint}`;
   }
-  console.log(url);
   const response = await fetch(`${url}`, {
     method: 'POST',
     headers: {

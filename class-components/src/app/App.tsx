@@ -23,14 +23,16 @@ export class App extends Component {
 
   componentDidMount() {
     this.fetchApiData(this.state.searchQuery);
-    console.log(this.state.searchQuery);
   }
 
   render() {
     return (
       <div>
-        <SearchSection {...this.state} />
-        <ResultSection {...this.state} />
+        <SearchSection
+          searchQuery={this.state.searchQuery}
+          fetchApiData={this.fetchApiData}
+        />
+        <ResultSection apiData={this.state.apiData} />
       </div>
     );
   }
