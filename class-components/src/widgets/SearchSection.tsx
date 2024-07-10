@@ -1,6 +1,5 @@
 import { Component, KeyboardEvent, ChangeEvent, FormEvent } from 'react';
 import SearchButton from '../feature/SearchButton.tsx';
-import ErrorButton from '../feature/ErrorButton.tsx';
 import './SearchSection.css';
 
 interface Props {
@@ -35,9 +34,7 @@ class SearchSection extends Component<Props> {
 
   render() {
     return (
-      <div className="search-section">
-        <h1>Database of Astronomical Objects</h1>
-        <p>Dear reviewer! I'm sorry. Please, check back later.</p>
+      <section className="search-section">
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
@@ -50,8 +47,7 @@ class SearchSection extends Component<Props> {
           />
           <SearchButton />
         </form>
-        <ErrorButton />
-      </div>
+      </section>
     );
   }
 }

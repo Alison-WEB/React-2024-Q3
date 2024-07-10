@@ -3,6 +3,7 @@ import SearchSection from '../widgets/SearchSection.tsx';
 import ResultSection from '../widgets/ResultSection.tsx';
 import getApiData from '../shared/getApiData.ts';
 import ApiData from '../shared/types.ts';
+import ErrorButton from '../feature/ErrorButton.tsx';
 import './App.css';
 
 interface State {
@@ -27,12 +28,18 @@ export class App extends Component {
 
   render() {
     return (
-      <div>
-        <SearchSection
-          searchQuery={this.state.searchQuery}
-          fetchApiData={this.fetchApiData}
-        />
-        <ResultSection apiData={this.state.apiData} />
+      <div className="page-wrapper">
+        <header>
+          <h1>Database of Astronomical Objects</h1>
+        </header>
+        <main>
+          <SearchSection
+            searchQuery={this.state.searchQuery}
+            fetchApiData={this.fetchApiData}
+          />
+          <ErrorButton type="button" />
+          <ResultSection apiData={this.state.apiData} />
+        </main>
       </div>
     );
   }
