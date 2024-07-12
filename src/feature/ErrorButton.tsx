@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import '../feature/ErrorButton.css';
+import './ErrorButton.css';
 
 interface State {
   hasError: boolean;
