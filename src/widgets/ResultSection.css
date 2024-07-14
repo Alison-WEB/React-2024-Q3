@@ -1,7 +1,13 @@
 .result-section {
   margin: 20px 0;
   display: flex;
+  gap: 30px;
+  min-width: 260px;
+}
+
+.result-list {
+  display: flex;
   flex-direction: column;
   gap: 20px;
-  min-width: 260px;
+  width: 100%;
 }

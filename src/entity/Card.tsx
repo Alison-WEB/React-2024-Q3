@@ -3,16 +3,14 @@ import './Card.css';
 
 const Card = ({
   astronomicalObject,
+  onClick,
 }: {
   astronomicalObject: AstronomicalObject;
+  onClick: (object: AstronomicalObject) => void;
 }) => {
   return (
-    <div className="card">
-      <h2>Name: {astronomicalObject.name}</h2>
-      <p>Type: {astronomicalObject.astronomicalObjectType}</p>
-      {astronomicalObject.location !== null && (
-        <p>Location: {astronomicalObject.location.name}</p>
-      )}
+    <div className="card" onClick={() => onClick(astronomicalObject)}>
+      <h2>{astronomicalObject.name}</h2>
     </div>
   );
 };

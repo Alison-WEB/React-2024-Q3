@@ -48,7 +48,6 @@ const SearchSection = ({
       </form>
     </section>
   );
-  // }
 };
 
 export default SearchSection;
