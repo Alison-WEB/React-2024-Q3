@@ -1,48 +1,42 @@
-import { Component } from 'react';
-import SearchSection from '../widgets/SearchSection.tsx';
-import ResultSection from '../widgets/ResultSection.tsx';
+import { useState, useEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import Router from './Router.tsx';
 import getApiData from '../shared/getApiData.ts';
 import ApiData from '../shared/types.ts';
-import ErrorButton from '../feature/ErrorButton.tsx';
 import './App.css';
 
-interface State {
-  searchQuery: string;
-  apiData: ApiData[] | null;
-}
+const App = () => {
+  const [searchQuery, setSearchQuery] = useState(
+    localStorage.getItem('searchQuery') || ''
+  );
+  const [apiData, setApiData] = useState<ApiData[] | null>(null);
 
-export class App extends Component {
-  state: State = {
-    searchQuery: localStorage.getItem('searchQuery') || '',
-    apiData: null,
-  };
-
-  fetchApiData = async (query?: string) => {
+  const fetchApiData = async (query?: string) => {
     const data = await getApiData(query);
-    this.setState({ apiData: data });
+    setApiData(data);
   };
 
-  componentDidMount() {
-    this.fetchApiData(this.state.searchQuery);
-  }
+  useEffect(() => {
+    fetchApiData(searchQuery);
+  }, [searchQuery]);
 
-  render() {
-    return (
+  return (
+    <BrowserRouter>
       <div className="page-wrapper">
         <header>
           <h1>Database of Astronomical Objects</h1>
         </header>
         <main>
-          <SearchSection
-            searchQuery={this.state.searchQuery}
-            fetchApiData={this.fetchApiData}
+          <Router
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            fetchApiData={fetchApiData}
+            apiData={apiData}
           />
-          <ErrorButton type="button" />
-          <ResultSection apiData={this.state.apiData} />
         </main>
       </div>
-    );
-  }
-}
+    </BrowserRouter>
+  );
+};
 
 export default App;

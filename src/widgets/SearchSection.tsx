@@ -1,55 +1,55 @@
-import { Component, KeyboardEvent, ChangeEvent, FormEvent } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { KeyboardEvent, ChangeEvent, FormEvent } from 'react';
 import SearchButton from '../feature/SearchButton.tsx';
 import './SearchSection.css';
 
-interface Props {
+const SearchSection = ({
+  searchQuery,
+  setSearchQuery,
+  fetchApiData,
+}: {
   searchQuery: string;
+  setSearchQuery: (query: string) => void;
   fetchApiData: (query?: string) => void;
-}
+}) => {
+  const [localSearchQuery, setLocalSearchQuery] = useState(searchQuery);
+  const navigate = useNavigate();
 
-class SearchSection extends Component<Props> {
-  constructor(props: Props) {
-    super(props);
-  }
-
-  state = {
-    searchQuery: this.props.searchQuery || '',
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setLocalSearchQuery(e.currentTarget.value);
   };
 
-  handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ searchQuery: e.currentTarget.value });
+  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+    setLocalSearchQuery(e.currentTarget.value);
   };
 
-  handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-    this.setState({ searchQuery: e.currentTarget.value });
-  };
-
-  handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (this.state.searchQuery) {
-      localStorage.setItem('searchQuery', this.state.searchQuery.trim());
-    }
-    this.props.fetchApiData(this.state.searchQuery);
+    localStorage.setItem('searchQuery', localSearchQuery.trim() || '');
+    setSearchQuery(localSearchQuery);
+    await fetchApiData(localSearchQuery);
+    navigate(`/search/${localSearchQuery}`);
   };
 
-  render() {
-    return (
-      <section className="search-section">
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            placeholder="Search"
-            value={this.state.searchQuery ?? ''}
-            onChange={this.handleInputChange}
-            onKeyDown={this.handleKeyPress}
-            onKeyUp={this.handleKeyPress}
-            maxLength={20}
-          />
-          <SearchButton />
-        </form>
-      </section>
-    );
-  }
-}
+  return (
+    <section className="search-section">
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Search"
+          value={localSearchQuery ?? ''}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyPress}
+          onKeyUp={handleKeyPress}
+          maxLength={20}
+          autoFocus
+        />
+        <SearchButton />
+      </form>
+    </section>
+  );
+  // }
+};
 
 export default SearchSection;
