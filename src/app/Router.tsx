@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import SearchSection from '../widgets/SearchSection.tsx';
 import ResultSection from '../widgets/ResultSection.tsx';
-import ApiData from '../shared/types.ts';
+import { ApiData } from '../shared/types.ts';
 import './App.css';
 
 const Router = ({
@@ -13,7 +13,7 @@ const Router = ({
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   fetchApiData: (query?: string) => void;
-  apiData: ApiData[] | null;
+  apiData: ApiData | null;
 }) => {
   return (
     <Routes>

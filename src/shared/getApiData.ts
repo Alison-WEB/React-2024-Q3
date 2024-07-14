@@ -18,7 +18,8 @@ async function getApiData(search?: string) {
     throw new Error("Network response wasn't ok");
   }
   const data = await response.json();
-  return data.astronomicalObjects;
+
+  return data;
 }
 
 export default getApiData;

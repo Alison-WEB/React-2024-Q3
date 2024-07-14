@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { KeyboardEvent, ChangeEvent, FormEvent } from 'react';
-import SearchButton from '../feature/SearchButton.tsx';
 import './SearchSection.css';
 
 const SearchSection = ({
@@ -45,7 +44,7 @@ const SearchSection = ({
           maxLength={20}
           autoFocus
         />
-        <SearchButton />
+        <button>Search</button>
       </form>
     </section>
   );
