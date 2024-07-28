@@ -26,6 +26,12 @@ const App = () => {
         <header>
           <h1>Database of Astronomical Objects</h1>
         </header>
+        <div>
+          Dear reviewer! I didn't have time to finish the assignment, but I plan
+          to get it done within the next few days. Please check back on August
+          1st.
+        </div>
+        <div>---</div>
         <main>
           <Router
             searchQuery={searchQuery}
